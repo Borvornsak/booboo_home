@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@storybook/addon-backgrounds": "^3.2.16",
     "react": "^16.1.1",
+    "react-bootstrap": "^0.31.5",
     "react-dom": "^16.1.1",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "styled-components": "^2.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -16,8 +19,8 @@
     "build-storybook": "build-storybook -s public"
   },
   "devDependencies": {
-    "@storybook/react": "^3.2.16",
     "@storybook/addon-actions": "^3.2.16",
-    "@storybook/addon-links": "^3.2.16"
+    "@storybook/addon-links": "^3.2.16",
+    "@storybook/react": "^3.2.16"
   }
 }
