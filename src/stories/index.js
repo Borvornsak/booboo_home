@@ -9,6 +9,8 @@ import { Welcome } from "@storybook/react/demo";
 import FoodQuantityDisplay from "../components/FoodQuantityDisplay";
 import Button from "../components/Button";
 
+import FontAwesome from "react-fontawesome";
+
 storiesOf("Welcome", module).add("to Storybook", () => (
   <Welcome showApp={linkTo("Button")} />
 ));
@@ -48,3 +50,18 @@ storiesOf("Button", module)
     </div>
   ));
 
+storiesOf("Food Quantity Display", module)
+  .addDecorator(
+    backgrounds([
+      { name: "Primary Confido", value: "#535067", default: true },
+      { name: "Secondary Confido", value: "#454254" }
+    ])
+  )
+  .add("Default", () => <FoodQuantityDisplay />)
+  .add("Quantity State", () => (
+    <div>
+      <FoodQuantityDisplay currentQuantity={25} maxQuantity={100} />
+      <FoodQuantityDisplay currentQuantity={75} maxQuantity={100} />
+      <FoodQuantityDisplay currentQuantity={100} maxQuantity={100} />
+    </div>
+  ));
