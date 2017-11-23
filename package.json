@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@storybook/addon-backgrounds": "^3.2.16",
+    "polished": "^1.9.0",
     "react": "^16.1.1",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.1.1",
