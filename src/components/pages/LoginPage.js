@@ -2,20 +2,26 @@ import React from "react";
 import styled from "styled-components";
 import { Modal } from "antd";
 import Button from "../Button";
+import WrappedLoginForm from "../Form/LoginForm";
+import WrappedRegisterForm from "../Form/RegisterForm";
 import { COLOR } from "../Variables";
 import foodImg from "../../img/pet.png";
-import "antd/dist/antd.css";
-
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background: ${COLOR.primaryConfido};
-`;
 
 const Header = styled.div`
   width: 100vw;
   height: 100px;
   background: ${COLOR.secondaryConfido};
+`;
+const Body = styled.div`
+  width: 100vw;
+  position: absolute;
+  top: 100px;
+  bottom: 0;
+  background: ${COLOR.primaryConfido};
+  display: inline-flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-around;
 `;
 
 class LoginPage extends React.Component {
@@ -31,7 +37,6 @@ class LoginPage extends React.Component {
   };
   handleOk = () => {
     this.setState({
-      ModalText: "The modal will be closed after two seconds",
       confirmLoading: true
     });
     setTimeout(() => {
@@ -48,9 +53,9 @@ class LoginPage extends React.Component {
     });
   };
   render() {
-    const { visible, confirmLoading, ModalText } = this.state;
+    const { visible, confirmLoading } = this.state;
     return (
-      <Container>
+      <div>
         <Header
           style={{
             display: "flex",
@@ -59,19 +64,25 @@ class LoginPage extends React.Component {
         >
           <Button text="Login" onClick={this.showModal} outline />
           <Modal
-            title="Title"
+            title="Login"
             visible={visible}
             onOk={this.handleOk}
             confirmLoading={confirmLoading}
             onCancel={this.handleCancel}
+            okText="Login"
           >
-            <p>{ModalText}</p>
+            <WrappedLoginForm />
           </Modal>
         </Header>
-        <div>
-          <img alt="Pet Food" src={foodImg} style={{ margin: "100px 200px" }} />
-        </div>
-      </Container>
+        <Body>
+          <img
+            alt="Pet Food"
+            src={foodImg}
+            style={{ width: "auto", height: "70%" }}
+          />
+          <WrappedRegisterForm />
+        </Body>
+      </div>
     );
   }
 }
