@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LoginPage from "./components/pages/LoginPage";
-
+import "antd/dist/antd.css";
 class App extends Component {
   render() {
     return (

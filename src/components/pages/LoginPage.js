@@ -6,7 +6,6 @@ import WrappedLoginForm from "../Form/LoginForm";
 import WrappedRegisterForm from "../Form/RegisterForm";
 import { COLOR } from "../Variables";
 import foodImg from "../../img/pet.png";
-import "antd/dist/antd.css";
 
 const Header = styled.div`
   width: 100vw;
