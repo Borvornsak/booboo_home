@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Modal } from "antd";
 import Button from "../Button";
+import WrappedLoginForm from "../Form/LoginForm";
 import WrappedRegisterForm from "../Form/RegisterForm";
 import { COLOR } from "../Variables";
 import foodImg from "../../img/pet.png";
@@ -37,7 +38,6 @@ class LoginPage extends React.Component {
   };
   handleOk = () => {
     this.setState({
-      ModalText: "The modal will be closed after two seconds",
       confirmLoading: true
     });
     setTimeout(() => {
@@ -54,7 +54,7 @@ class LoginPage extends React.Component {
     });
   };
   render() {
-    const { visible, confirmLoading, ModalText } = this.state;
+    const { visible, confirmLoading } = this.state;
     return (
       <div>
         <Header
@@ -65,13 +65,14 @@ class LoginPage extends React.Component {
         >
           <Button text="Login" onClick={this.showModal} outline />
           <Modal
-            title="Title"
+            title="Login"
             visible={visible}
             onOk={this.handleOk}
             confirmLoading={confirmLoading}
             onCancel={this.handleCancel}
+            okText="Login"
           >
-            <p>{ModalText}</p>
+            <WrappedLoginForm />
           </Modal>
         </Header>
         <Body>
