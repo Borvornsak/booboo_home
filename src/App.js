@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import LoginPage from "./components/pages/LoginPage";
+// import LoginPage from "./components/pages/LoginPage";
+import DashboardPage from "./components/pages/DashboardPage";
 import "antd/dist/antd.css";
 class App extends Component {
   render() {
@@ -12,7 +13,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p> */}
-        <LoginPage />
+        {/* <LoginPage /> */}
+        <DashboardPage />
       </div>
     );
   }
