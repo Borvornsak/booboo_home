@@ -9,7 +9,7 @@ const DefaultProps = {
 };
 
 const Container = styled.div`
-  width: 20%;
+  width: 25%;
   border-radius: 5px;
   margin: 1em 1em;
   background: white;
