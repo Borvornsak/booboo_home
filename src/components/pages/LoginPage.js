@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Modal } from "antd";
 import Button from "../Button";
 import { COLOR } from "../Variables";
+import foodImg from "../../img/pet.png";
+import "antd/dist/antd.css";
 
 const Container = styled.div`
   width: 100vw;
@@ -55,13 +57,9 @@ class LoginPage extends React.Component {
             justifyContent: "flex-end"
           }}
         >
-          <Button
-            text="Login"
-            style={{ height: "44px" }}
-            onClick={this.showModal}
-            outline
-          />
+          <Button text="Login" onClick={this.showModal} outline />
           <Modal
+            title="Title"
             visible={visible}
             onOk={this.handleOk}
             confirmLoading={confirmLoading}
@@ -70,6 +68,9 @@ class LoginPage extends React.Component {
             <p>{ModalText}</p>
           </Modal>
         </Header>
+        <div>
+          <img alt="Pet Food" src={foodImg} style={{ margin: "100px 200px" }} />
+        </div>
       </Container>
     );
   }
