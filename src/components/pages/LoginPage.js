@@ -6,11 +6,16 @@ import WrappedLoginForm from "../Form/LoginForm";
 import WrappedRegisterForm from "../Form/RegisterForm";
 import { COLOR } from "../Variables";
 import foodImg from "../../img/pet.png";
+import logo from "../../img/Booboo_home_logo_1_5.png";
 
 const Header = styled.div`
   width: 100vw;
   height: 100px;
+  padding: 0 50px 0 0;
   background: ${COLOR.secondaryConfido};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 const Body = styled.div`
   width: 100vw;
@@ -56,12 +61,8 @@ class LoginPage extends React.Component {
     const { visible, confirmLoading } = this.state;
     return (
       <div>
-        <Header
-          style={{
-            display: "flex",
-            justifyContent: "flex-end"
-          }}
-        >
+        <Header>
+          <img alt="logo" src={logo} style={{ width: "auto", height: "80%" }} />
           <Button text="Login" onClick={this.showModal} outline />
           <Modal
             title="Login"
