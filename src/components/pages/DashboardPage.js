@@ -9,11 +9,16 @@ import emptyFood from "../../img/Booboo_home_empty.png";
 import halfFood from "../../img/Booboo_home_few.png";
 import moreFood from "../../img/Booboo_home_half.png";
 import fullFood from "../../img/Booboo_home_full.png";
+import logo from "../../img/Booboo_home_logo_1_5.png";
 
 const Header = styled.div`
   width: 100vw;
   height: 100px;
+  padding: 0 50px 0 0;
   background: ${COLOR.secondaryConfido};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 const Body = styled.div`
   width: 100vw;
@@ -68,12 +73,8 @@ class LoginPage extends React.Component {
     const { visible, confirmLoading } = this.state;
     return (
       <div>
-        <Header
-          style={{
-            display: "flex",
-            justifyContent: "flex-end"
-          }}
-        >
+        <Header>
+          <img alt="logo" src={logo} style={{ width: "auto", height: "80%" }} />
           <Button text="Setting" onClick={this.showModal} outline />
           <Modal
             title="Login"
@@ -89,7 +90,7 @@ class LoginPage extends React.Component {
         <Body>
           {this.state.ratio <= 25 && (
             <img
-              alt="Pet Food"
+              alt="Empty Food"
               src={emptyFood}
               style={{ width: "auto", height: "80%" }}
             />
@@ -97,7 +98,7 @@ class LoginPage extends React.Component {
           {this.state.ratio > 25 &&
             this.state.ratio <= 50 && (
               <img
-                alt="Pet Food"
+                alt="Half Food"
                 src={halfFood}
                 style={{ width: "auto", height: "80%" }}
               />
@@ -105,7 +106,7 @@ class LoginPage extends React.Component {
           {this.state.ratio > 50 &&
             this.state.ratio <= 75 && (
               <img
-                alt="Pet Food"
+                alt="More Food"
                 src={moreFood}
                 style={{ width: "auto", height: "80%" }}
               />
@@ -113,7 +114,7 @@ class LoginPage extends React.Component {
           {this.state.ratio > 75 &&
             this.state.ratio <= 100 && (
               <img
-                alt="Pet Food"
+                alt="Full Food"
                 src={fullFood}
                 style={{ width: "auto", height: "80%" }}
               />
