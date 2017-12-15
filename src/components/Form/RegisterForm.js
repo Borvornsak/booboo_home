@@ -156,6 +156,20 @@ class RegisterForm extends React.Component {
               <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
             )}
           </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="Serial Number"
+          >
+            {getFieldDecorator("Serial Number", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please input product's serial number!",
+                  whitespace: true
+                }
+              ]
+            })(<Input />)}
+          </FormItem>
           <FormItem {...tailFormItemLayout}>
             {getFieldDecorator("agreement", {
               valuePropName: "checked"
