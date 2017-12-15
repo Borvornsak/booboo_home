@@ -73,7 +73,11 @@ export default class FillFoodPage extends React.Component {
             </RadioGroup>
           </FormItem>
           <FormItem {...formItemLayout} label="Fill by">
-            <RadioGroup onChange={this.onByChange} value={this.state.fillBy}>
+            <RadioGroup
+              onChange={this.onByChange}
+              value={this.state.fillBy}
+              disabled={this.state.fillType === 2}
+            >
               <Radio value={1}>Quantity</Radio>
               <Radio value={2}>Time</Radio>
             </RadioGroup>
