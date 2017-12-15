@@ -20,7 +20,9 @@ class RegisterForm extends React.Component {
   state = {
     confirmDirty: false,
     autoCompleteResult: [],
-    visible: false
+    visible: false,
+    loading: false,
+    iconLoading: false,
   };
   handleSubmit = e => {
     e.preventDefault();
@@ -49,6 +51,16 @@ class RegisterForm extends React.Component {
     }
     callback();
   };
+
+  enterLoading = () => {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({
+        loading: false
+      });
+      this.props.onClick();
+    }, 2000);
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -180,7 +192,7 @@ class RegisterForm extends React.Component {
             )}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" loading={this.state.loading} onClick={this.enterLoading}>
               Register
             </Button>
           </FormItem>

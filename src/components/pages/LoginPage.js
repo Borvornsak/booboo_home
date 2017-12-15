@@ -49,6 +49,7 @@ class LoginPage extends React.Component {
         visible: false,
         confirmLoading: false
       });
+      this.props.onLogin();
     }, 2000);
   };
   handleCancel = e => {
@@ -81,7 +82,7 @@ class LoginPage extends React.Component {
             src={foodImg}
             style={{ width: "auto", height: "70%" }}
           />
-          <WrappedRegisterForm />
+          <WrappedRegisterForm onClick={this.props.onLogin}/>
         </Body>
       </div>
     );
