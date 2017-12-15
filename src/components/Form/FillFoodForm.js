@@ -30,6 +30,7 @@ export default class FillFoodPage extends React.Component {
     }
     if (!("value" in this.props)) {
       this.setState({ max });
+      this.props.onChangeMax(max);
     }
   };
   handleRemainChange = e => {

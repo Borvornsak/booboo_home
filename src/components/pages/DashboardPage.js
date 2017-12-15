@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Modal } from "antd";
 import Button from "../Button";
 import FoodQuantityDisplay from "../FoodQuantityDisplay";
-import FillFoodPage from "../Form/FillFoodForm";
+import FillFoodForm from "../Form/FillFoodForm";
+import ManualFillForm from "../Form/ManualFillForm";
 import { COLOR } from "../Variables";
 import emptyFood from "../../img/Booboo_home_empty.png";
 import halfFood from "../../img/Booboo_home_few.png";
@@ -45,7 +46,11 @@ class LoginPage extends React.Component {
   state = {
     ratio: 10,
     visible: false,
-    confirmLoading: false
+    confirmLoading: false,
+    visible2: false,
+    confirmLoading2: false,
+    max: 100,
+    maxInModal: 100
   };
   showModal = () => {
     this.setState({
@@ -59,7 +64,8 @@ class LoginPage extends React.Component {
     setTimeout(() => {
       this.setState({
         visible: false,
-        confirmLoading: false
+        confirmLoading: false,
+        max: this.state.maxInModal
       });
     }, 2000);
   };
@@ -69,8 +75,33 @@ class LoginPage extends React.Component {
       visible: false
     });
   };
+  showModal2 = () => {
+    this.setState({
+      visible2: true
+    });
+  };
+  handleOk2 = () => {
+    this.setState({
+      confirmLoading2: true
+    });
+    setTimeout(() => {
+      this.setState({
+        visible2: false,
+        confirmLoading2: false
+      });
+    }, 2000);
+  };
+  handleCancel2 = e => {
+    console.log(e);
+    this.setState({
+      visible2: false
+    });
+  };
+  changeMaxInModal = value => {
+    this.setState({ maxInModal: value });
+  };
   render() {
-    const { visible, confirmLoading } = this.state;
+    const { visible, confirmLoading, visible2, confirmLoading2 } = this.state;
     return (
       <div>
         <Header>
@@ -89,7 +120,10 @@ class LoginPage extends React.Component {
             onCancel={this.handleCancel}
             okText="Submit"
           >
-            <FillFoodPage style={{ width: "100%" }} />
+            <FillFoodForm
+              onChangeMax={this.changeMaxInModal}
+              style={{ width: "100%" }}
+            />
           </Modal>
         </Header>
         <Body>
@@ -126,8 +160,18 @@ class LoginPage extends React.Component {
             )}
           <Display>
             <FoodQuantityDisplay />
-            <Button text="Feed!!!" size="2rem" />
+            <Button text="Feed!!!" size="2rem" onClick={this.showModal2} />
           </Display>
+          <Modal
+            title="- Feed Manually -"
+            visible={visible2}
+            onOk={this.handleOk2}
+            confirmLoading={confirmLoading2}
+            onCancel={this.handleCancel2}
+            okText="Submit"
+          >
+            <ManualFillForm style={{ width: "100%" }} max={this.state.max} />
+          </Modal>
         </Body>
       </div>
     );
