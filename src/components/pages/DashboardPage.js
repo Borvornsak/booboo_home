@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Modal } from "antd";
 import Button from "../Button";
-import WrappedLoginForm from "../Form/LoginForm";
 import FoodQuantityDisplay from "../FoodQuantityDisplay";
+import FillFoodPage from "../Form/FillFoodForm";
 import { COLOR } from "../Variables";
 import emptyFood from "../../img/Booboo_home_empty.png";
 import halfFood from "../../img/Booboo_home_few.png";
@@ -74,17 +74,22 @@ class LoginPage extends React.Component {
     return (
       <div>
         <Header>
-          <img alt="logo" src={logo} style={{ width: "auto", height: "80%", cursor: "pointer" }} onClick={this.props.onLogout}/>
+          <img
+            alt="logo"
+            src={logo}
+            style={{ width: "auto", height: "80%", cursor: "pointer" }}
+            onClick={this.props.onLogout}
+          />
           <Button text="Setting" onClick={this.showModal} outline />
           <Modal
-            title="Login"
+            title="- Fill Booboo Food -"
             visible={visible}
             onOk={this.handleOk}
             confirmLoading={confirmLoading}
             onCancel={this.handleCancel}
-            okText="Login"
+            okText="Submit"
           >
-            <WrappedLoginForm />
+            <FillFoodPage style={{ width: "100%" }} />
           </Modal>
         </Header>
         <Body>
