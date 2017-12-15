@@ -33,7 +33,7 @@ const Body = styled.div`
 `;
 
 const Display = styled.div`
-  width: 20%;
+  width: 25%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,7 +43,7 @@ const Display = styled.div`
 
 class LoginPage extends React.Component {
   state = {
-    ratio: 50,
+    ratio: 10,
     visible: false,
     confirmLoading: false
   };
@@ -74,7 +74,7 @@ class LoginPage extends React.Component {
     return (
       <div>
         <Header>
-          <img alt="logo" src={logo} style={{ width: "auto", height: "80%" }} />
+          <img alt="logo" src={logo} style={{ width: "auto", height: "80%", cursor: "pointer" }} onClick={this.props.onLogout}/>
           <Button text="Setting" onClick={this.showModal} outline />
           <Modal
             title="Login"
