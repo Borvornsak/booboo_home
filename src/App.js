@@ -21,6 +21,7 @@ class App extends Component {
         {this.state.pages === "dashboard" && (
           <DashboardPage onLogout={this.handleLogout} />
         )}
+        {/* <DashboardPage /> */}
       </div>
     );
   }
