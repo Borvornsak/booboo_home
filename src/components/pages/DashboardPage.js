@@ -11,6 +11,8 @@ import halfFood from "../../img/Booboo_home_few.png";
 import moreFood from "../../img/Booboo_home_half.png";
 import fullFood from "../../img/Booboo_home_full.png";
 import logo from "../../img/Booboo_home_logo_1_5.png";
+import axios from 'axios';
+import Microgear from 'microgear';
 
 const Header = styled.div`
   width: 100vw;
@@ -42,8 +44,15 @@ const Display = styled.div`
   justify-content: space-around;
 `;
 
+const APPID= "BooBooHome" //enter your appid
+const KEY = "LxESkpmpJu6rYoZ" //enter your key
+const SECRET = "GH5dbnX3PUlf6aRWvrNKq191a" //enter your secret
+const ALIAS = "esp8266" //same alias you set on NodeCMU
+const url = 'https://api.netpie.io/microgear/'+APPID+'/'+ALIAS+'?retain&auth=' +KEY+':'+SECRET;
+
 class LoginPage extends React.Component {
   state = {
+    fill: "",
     ratio: 10,
     visible: false,
     confirmLoading: false,
@@ -52,6 +61,17 @@ class LoginPage extends React.Component {
     max: 100,
     maxInModal: 100
   };
+  fetchWeigth = () => {
+    axios.get(`${url}`)
+    .then(function(response){
+      console.log(response.data)
+    })
+    .then(
+      this.setState({
+        ratio: this.state.fill * 100 / this.state.max
+      })
+    )
+  }
   showModal = () => {
     this.setState({
       visible: true
@@ -84,12 +104,18 @@ class LoginPage extends React.Component {
     this.setState({
       confirmLoading2: true
     });
+    console.log("Fill: ",this.state.fill)
     setTimeout(() => {
       this.setState({
         visible2: false,
         confirmLoading2: false
       });
     }, 2000);
+    axios.put(`${url}`,{
+      value: this.state.fill
+    }).then(function(response){
+      console.log("something")
+    })
   };
   handleCancel2 = e => {
     console.log(e);
@@ -99,6 +125,9 @@ class LoginPage extends React.Component {
   };
   changeMaxInModal = value => {
     this.setState({ maxInModal: value });
+  };
+  handleFill = value => {
+    this.setState({ fill: value })
   };
   render() {
     const { visible, confirmLoading, visible2, confirmLoading2 } = this.state;
@@ -160,6 +189,7 @@ class LoginPage extends React.Component {
             )}
           <Display>
             <FoodQuantityDisplay />
+            <Button text="Refresh" size="2rem" onClick={this.fetchWeigth} />
             <Button text="Feed!!!" size="2rem" onClick={this.showModal2} />
           </Display>
           <Modal
@@ -170,7 +200,12 @@ class LoginPage extends React.Component {
             onCancel={this.handleCancel2}
             okText="Submit"
           >
-            <ManualFillForm style={{ width: "100%" }} max={this.state.max} />
+            <ManualFillForm
+              style={{ width: "100%" }}
+              max={this.state.max}
+              fill={this.state.fill}
+              handleFill={this.handleFill}
+            />
           </Modal>
         </Body>
       </div>

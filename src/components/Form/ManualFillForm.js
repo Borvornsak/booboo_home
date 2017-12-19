@@ -6,7 +6,6 @@ const FormItem = Form.Item;
 
 export default class ManualFillForm extends React.Component {
   state = {
-    fill: "",
     check: false,
     ratio: 0
   };
@@ -16,7 +15,8 @@ export default class ManualFillForm extends React.Component {
       return;
     }
     if (!("value" in this.props)) {
-      this.setState({ fill, ratio: fill * 100 / this.props.max });
+      this.props.handleFill(fill)
+      this.setState({ ratio: fill * 100 / this.props.max });
     }
   };
   handleCheckbox = e => {
@@ -51,7 +51,7 @@ export default class ManualFillForm extends React.Component {
               style={{ width: 150 }}
               placeholder="fill grams of food"
               onChange={this.handleFillChange}
-              value={this.state.fill}
+              value={this.props.fill}
               disabled={this.state.check}
             />
           </FormItem>
