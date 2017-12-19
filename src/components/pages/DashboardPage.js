@@ -49,6 +49,30 @@ const KEY = "LxESkpmpJu6rYoZ" //enter your key
 const SECRET = "GH5dbnX3PUlf6aRWvrNKq191a" //enter your secret
 const ALIAS = "esp8266" //same alias you set on NodeCMU
 const url = 'https://api.netpie.io/microgear/'+APPID+'/'+ALIAS+'?retain&auth=' +KEY+':'+SECRET;
+const ALIAS2 = "web"
+
+const microgear = Microgear.create({
+  key: KEY,
+  secret: SECRET,
+  alias : ALIAS2
+});
+microgear.on('message',function(topic,msg) {
+  document.getElementById("raw_data").innerHTML = "Data = " + msg;
+  console.log(msg);  // for debug
+});
+microgear.on('connected', function() {
+  microgear.setAlias(ALIAS2);
+  document.getElementById("connected_NETPIE").innerHTML = "Connected to NETPIE"
+});
+microgear.on('present', function(event) {
+  console.log(event);
+});
+microgear.on('absent', function(event) {
+  console.log(event);
+});
+microgear.resettoken(function(err) {
+  microgear.connect(APPID);
+});
 
 class LoginPage extends React.Component {
   state = {
