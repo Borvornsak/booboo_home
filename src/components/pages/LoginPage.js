@@ -2,20 +2,31 @@ import React from "react";
 import styled from "styled-components";
 import { Modal } from "antd";
 import Button from "../Button";
+import WrappedLoginForm from "../Form/LoginForm";
+import WrappedRegisterForm from "../Form/RegisterForm";
 import { COLOR } from "../Variables";
 import foodImg from "../../img/pet.png";
-import "antd/dist/antd.css";
-
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background: ${COLOR.primaryConfido};
-`;
+import logo from "../../img/Booboo_home_logo_1_5.png";
 
 const Header = styled.div`
   width: 100vw;
   height: 100px;
+  padding: 0 50px 0 0;
   background: ${COLOR.secondaryConfido};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const Body = styled.div`
+  width: 100vw;
+  position: absolute;
+  top: 100px;
+  bottom: 0;
+  background: ${COLOR.primaryConfido};
+  display: inline-flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-around;
 `;
 
 class LoginPage extends React.Component {
@@ -31,7 +42,6 @@ class LoginPage extends React.Component {
   };
   handleOk = () => {
     this.setState({
-      ModalText: "The modal will be closed after two seconds",
       confirmLoading: true
     });
     setTimeout(() => {
@@ -39,6 +49,7 @@ class LoginPage extends React.Component {
         visible: false,
         confirmLoading: false
       });
+      this.props.onLogin();
     }, 2000);
   };
   handleCancel = e => {
@@ -48,30 +59,32 @@ class LoginPage extends React.Component {
     });
   };
   render() {
-    const { visible, confirmLoading, ModalText } = this.state;
+    const { visible, confirmLoading } = this.state;
     return (
-      <Container>
-        <Header
-          style={{
-            display: "flex",
-            justifyContent: "flex-end"
-          }}
-        >
+      <div>
+        <Header>
+          <img alt="logo" src={logo} style={{ width: "auto", height: "80%" }} />
           <Button text="Login" onClick={this.showModal} outline />
           <Modal
-            title="Title"
+            title="Login"
             visible={visible}
             onOk={this.handleOk}
             confirmLoading={confirmLoading}
             onCancel={this.handleCancel}
+            okText="Login"
           >
-            <p>{ModalText}</p>
+            <WrappedLoginForm />
           </Modal>
         </Header>
-        <div>
-          <img alt="Pet Food" src={foodImg} style={{ margin: "100px 200px" }} />
-        </div>
-      </Container>
+        <Body>
+          <img
+            alt="Pet Food"
+            src={foodImg}
+            style={{ width: "auto", height: "70%" }}
+          />
+          <WrappedRegisterForm onClick={this.props.onLogin}/>
+        </Body>
+      </div>
     );
   }
 }

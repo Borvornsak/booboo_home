@@ -17,6 +17,7 @@ const MyButton = styled.button`
   border-radius: 3px;
   padding: 0.25em 1em;
   margin: 1em 1em;
+  cursor: pointer;
   background: ${props => props.color};
   color: ${COLOR.primaryConfido};
   border: 2px solid ${props => props.color};

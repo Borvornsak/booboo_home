@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import FontAwesome from "react-fontawesome";
+import { COLOR } from "./Variables";
 
 const DefaultProps = {
   currentQuantity: 0,
@@ -9,7 +9,7 @@ const DefaultProps = {
 };
 
 const Container = styled.div`
-  width: 25%;
+  width: 100%;
   border-radius: 5px;
   margin: 1em 1em;
   background: white;
@@ -32,7 +32,9 @@ const StateShow = styled.div`
   border-bottom-right-radius: 5px;
   padding: 0.5em 1em;
   background: ${props =>
-    props.ratio <= 0.25 ? "#e28d8a" : props.ratio <= 0.75 ? "yellow" : "green"};
+    props.ratio <= 0.25
+      ? COLOR.cherry
+      : props.ratio <= 0.75 ? COLOR.cream : COLOR.valid};
   color: white;
   font-size: 1.5rem;
   text-align: center;
@@ -41,25 +43,23 @@ const StateShow = styled.div`
 const FoodQuantityDisplay = ({ currentQuantity, maxQuantity, isNaN }) => {
   let ratio = currentQuantity / maxQuantity;
   return (
-    <div>
-      <Container>
-        <Information>
-          <b>Food Quantity</b>
-          <br />
-          <Quantity>
-            {currentQuantity}/{maxQuantity} g
-          </Quantity>
-        </Information>
-        <StateShow ratio={ratio}>
-          state : {ratio <= 0.25 ? "Low" : ratio <= 0.75 ? "Medium" : "High"}
-        </StateShow>
-      </Container>
-    </div>
+    <Container>
+      <Information>
+        <b>Food Quantity</b>
+        <br />
+        <Quantity>
+          {currentQuantity}/{maxQuantity} g
+        </Quantity>
+      </Information>
+      <StateShow ratio={ratio}>
+        state : {ratio <= 0.25 ? "Low" : ratio <= 0.75 ? "Medium" : "High"}
+      </StateShow>
+    </Container>
   );
 };
 
 FoodQuantityDisplay.propTypes = {
-  currentQuantity: PropTypes.number,
+  currentQuantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxQuantity: PropTypes.number,
   isNaN: PropTypes.bool
 };
