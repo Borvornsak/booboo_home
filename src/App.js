@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import LoginPage from "./components/pages/LoginPage";
 import DashboardPage from "./components/pages/DashboardPage";
-import FillFoodPage from "./components/pages/FillFoodPage";
 import "antd/dist/antd.css";
 
 class App extends Component {
@@ -15,13 +14,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.pages === "login" && (
+        {/* {this.state.pages === "login" && (
           <LoginPage onLogin={this.handleLogin} />
         )}
         {this.state.pages === "dashboard" && (
           <DashboardPage onLogout={this.handleLogout} />
-        )}
-        {/* <DashboardPage /> */}
+        )} */}
+        <DashboardPage />
       </div>
     );
   }

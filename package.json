@@ -5,6 +5,8 @@
   "dependencies": {
     "@storybook/addon-backgrounds": "^3.2.16",
     "antd": "^3.0.1",
+    "axios": "^0.17.1",
+    "microgear": "^0.8.1",
     "polished": "^1.9.0",
     "react": "^16.1.1",
     "react-bootstrap": "^0.31.5",

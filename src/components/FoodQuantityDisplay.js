@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { COLOR } from "./Variables";
 
 const DefaultProps = {
   currentQuantity: 0,
@@ -31,7 +32,9 @@ const StateShow = styled.div`
   border-bottom-right-radius: 5px;
   padding: 0.5em 1em;
   background: ${props =>
-    props.ratio <= 0.25 ? "#e28d8a" : props.ratio <= 0.75 ? "yellow" : "green"};
+    props.ratio <= 0.25
+      ? COLOR.cherry
+      : props.ratio <= 0.75 ? COLOR.cream : COLOR.valid};
   color: white;
   font-size: 1.5rem;
   text-align: center;
@@ -56,7 +59,7 @@ const FoodQuantityDisplay = ({ currentQuantity, maxQuantity, isNaN }) => {
 };
 
 FoodQuantityDisplay.propTypes = {
-  currentQuantity: PropTypes.number,
+  currentQuantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxQuantity: PropTypes.number,
   isNaN: PropTypes.bool
 };

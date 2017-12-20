@@ -29,36 +29,36 @@
     You need to enable JavaScript to run this app.
   </noscript>
   <div id="root"></div>
-  <script src="https://cdn.netpie.io/microgear.js"></script>
+  <!-- <script src="https://cdn.netpie.io/microgear.js"></script>
   <script>
-    const APPID= "BooBooHome" //enter your appid
+    const APPID = "BooBooHome" //enter your appid
     const KEY = "LxESkpmpJu6rYoZ" //enter your key
     const SECRET = "GH5dbnX3PUlf6aRWvrNKq191a" //enter your secret
-    const ALIAS = "web" //same alias you set on NodeCMU
+    const ALIAS = "web2" //same alias you set on NodeCMU
     //const thing1 = "NodeMCU1";
     var microgear = Microgear.create({
       key: KEY,
       secret: SECRET,
-      alias : ALIAS
+      alias: ALIAS
     });
-    microgear.on('message',function(topic,msg) {
+    microgear.on('message', function (topic, msg) {
       document.getElementById("raw_data").innerHTML = "Data = " + msg;
       console.log(msg);  // for debug
     });
-    microgear.on('connected', function() {
+    microgear.on('connected', function () {
       microgear.setAlias(ALIAS);
       document.getElementById("connected_NETPIE").innerHTML = "Connected to NETPIE"
     });
-    microgear.on('present', function(event) {
+    microgear.on('present', function (event) {
       console.log(event);
     });
-    microgear.on('absent', function(event) {
+    microgear.on('absent', function (event) {
       console.log(event);
     });
-    microgear.resettoken(function(err) {
+    microgear.resettoken(function (err) {
       microgear.connect(APPID);
     });
-  </script>
+  </script> -->
 
   <h1 id="connected_NETPIE"></h1>
   <p id="raw_data"></p>
