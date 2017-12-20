@@ -34,7 +34,7 @@ const StateShow = styled.div`
   background: ${props =>
     props.ratio <= 0.25
       ? COLOR.cherry
-      : props.ratio <= 0.75 ? COLOR.cream : COLOR.valid};
+      : props.ratio <= 0.75 ? COLOR.medium : COLOR.valid};
   color: white;
   font-size: 1.5rem;
   text-align: center;

@@ -36,5 +36,6 @@ export const COLOR = {
   primaryConfido: "#535067",
   secondaryConfido: "#454254",
   cream: "#fbe591",
-  cherry: "#e28d8a"
+  cherry: "#e28d8a",
+  medium: "#adeca8"
 };
