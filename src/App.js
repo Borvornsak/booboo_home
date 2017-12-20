@@ -14,13 +14,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        {/* {this.state.pages === "login" && (
+        {this.state.pages === "login" && (
           <LoginPage onLogin={this.handleLogin} />
         )}
         {this.state.pages === "dashboard" && (
           <DashboardPage onLogout={this.handleLogout} />
-        )} */}
-        <DashboardPage />
+        )}
+        {/* <DashboardPage /> */}
       </div>
     );
   }
