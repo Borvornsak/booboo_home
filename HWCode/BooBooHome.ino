@@ -10,10 +10,12 @@ SoftwareSerial mySerial(13,15); //RX,TX
 const char* ssid     = "Panyawut's iPhone";
 const char* password = "ab1ab1ab1";
 
+
 #define APPID   "BooBooHome"
 #define KEY     "LxESkpmpJu6rYoZ"
 #define SECRET  "GH5dbnX3PUlf6aRWvrNKq191a"
 #define ALIAS   "esp8266"
+#define Target  "web"
 
 WiFiClient client;
 
@@ -25,6 +27,7 @@ MicroGear microgear(client);
 void onMsghandler(char *topic, uint8_t* msg, unsigned int msglen) {
     Serial.print("Incoming message --> ");
     msg[msglen] = '\0';
+    mySerial.print((char *)msg);
     Serial.println((char *)msg);
 }
 
@@ -98,14 +101,15 @@ void loop() {
         microgear.loop();
         if(mySerial.available()){
           String tmp =  mySerial.readStringUntil('a');
-          String tmp2 = "{weight:" + tmp + "}";
-          Serial.println(tmp2);
           
           //Serial.println(tmp.length());
           if(tmp != ""){
-              Serial.println("Publish...");
-              microgear.writeFeed("BooBooFeeds", tmp2);
+              Serial.println(tmp);
+              microgear.chat(Target ,tmp);
+              Serial.println("Success");
           }  
+          
+          //microgear.chat(Target ,250); // <- function ส่งขึ้นเน็ตพาย
         }
     }
     else {
@@ -114,10 +118,6 @@ void loop() {
             microgear.connect(APPID);
             timer = 0;
         }
-        else timer += 10;
+        else timer += 100;
     }
-//    if(mySerial.available()){
-//      String tmp =  mySerial.readStringUntil('a');
-//      Serial.println(tmp);
-//    }
 }

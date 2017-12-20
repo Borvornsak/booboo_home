@@ -148,6 +148,7 @@ HX711 HX711_Tare(HX711 data, uint8_t times)
     data.offset = sum;
     return data;
 }
+
 /* USER CODE END 0 */
 
 int main(void)
@@ -185,10 +186,10 @@ int main(void)
   data.pinSck = GPIO_PIN_8;
   data.gain = 1;
   HX711_Init(data);
-  data = HX711_Tare(data,500);
+  data = HX711_Tare(data,2000);
 
   int buffer;
-  int buffer2;
+  char buffer2[32];
   int w;
   /* USER CODE END 2 */
 
@@ -200,19 +201,39 @@ int main(void)
 
   /* USER CODE BEGIN 3 */
 	  buffer = HX711_Value(data)-data.offset;
-	  buffer2=buffer;
-	  w = buffer/150;
+	  w = buffer/170;
 	  char output[256];
 	  memset(output,0,256);
+	  memset(buffer2,0,32);
 	  sprintf(output,"%da", w);
 	  HAL_UART_Transmit(&huart2, output, sizeof(output), 100);
 
-	  if(w > 500){
-		  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,1);
-	  }else{
-		  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13,0);
+	  if(HAL_UART_Receive(&huart2, buffer2, 1,1000) == HAL_OK){
+		  if(buffer2[0] == '1'){
+			  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, 1);
+		  }
+		  else if(buffer2[0] == '2'){
+			  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, 1);
+			  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, 1);
+		  }
+		  else if(buffer2[0] == '3'){
+			  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, 1);
+			  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, 1);
+			  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, 1);
+		  }
+		  else if(buffer2[0] == '4'){
+			  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, 1);
+			  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, 1);
+			  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, 1);
+			  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, 1);
+		  }
+		  HAL_Delay(5000);
+		  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, 0);
+		  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, 0);
+		  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, 0);
+		  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, 0);
 	  }
-	  HAL_Delay(15000);
+	  HAL_Delay(1500);
 
   }
   /* USER CODE END 3 */
